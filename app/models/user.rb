@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :restaurants
+
   after_create :send_welcome_email
 
 
@@ -11,5 +13,7 @@ class User < ApplicationRecord
     UserMailer.welcome(self).deliver_now
   end
 
-
+  def name
+    email
+  end
 end
